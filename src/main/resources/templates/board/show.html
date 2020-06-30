@@ -20,7 +20,7 @@
                       </div>
                       <div class="article-header-text">
                           <a href="#" class="article-author-name">{{writer.userId}}</a>
-                          <a href="#" class="article-header-time" title="퍼머링크">
+                          <a href="#" class="article-header-time">
                               {{formattedCreateDate}}
                               <i class="icon-link"></i>
                           </a>
@@ -66,9 +66,9 @@
                               </div>
                               <div class="article-util">
                                   <ul class="article-util-list">
-										<li>
+										<!-- <li>
                                         	<a class="link-update-answer" href="/api/boards/{{question.id}}/answers/{{id}}">수정</a>
-										</li>
+										</li> -->
 										<li>
 											<a class="link-delete-answer" href="/api/boards/{{question.id}}/answers/{{id}}">삭제</a>
 										</li>  
@@ -110,9 +110,7 @@
 		</div>
 		<div class="article-util">
 		<ul class="article-util-list">
-			<li>
-				<a class="link-update-answer" href="/api/boards/{3}/answers/{4}">수정</a>
-			</li>
+		
 			<li>
 				<a class="link-delete-answer" href="/api/boards/{3}/answers/{4}">삭제</a>
 			</li>

@@ -54,7 +54,6 @@ public class QuestionController {
 	@GetMapping("/{id}/form") // ID에 해당하는 수정 폼 이동
 	public String updateForm(@PathVariable Long id, Model model, HttpSession session, HttpServletResponse response)
 			throws Exception {
-		System.out.println("1");
 		Question question = questionRepository.findOne(id);
 		Result result = HttpSessionUtils.valid(session, question);
 		if (!result.isValid()) {
@@ -74,17 +73,16 @@ public class QuestionController {
 	}
 
 	@DeleteMapping("/{id}") // ID에 해당하는 글 삭제
-	public String delete(@PathVariable Long id, Model model, HttpSession session, HttpServletResponse response)
-			throws Exception {
+	public String delete(@PathVariable Long id, Model model, HttpSession session, HttpServletResponse response) throws Exception {
 		Question question = questionRepository.findOne(id);
 		Result result = HttpSessionUtils.valid(session, question);
 		if (!result.isValid()) {
-			Result.message("<script>alert('자신이 쓴 글만 삭제할 수 있습니다.'); history.go(-1);</script>", response);
-			return "/board/show";
+			Result.message("<script>alert('자신이 쓴 글만 수정할 수 있습니다.'); history.go(-1);</script>", response);
+			return "/user/login";
 		}
 
 		questionRepository.delete(id);
-		return "index";
+		return "redirect:/main";
 	}
 
 }

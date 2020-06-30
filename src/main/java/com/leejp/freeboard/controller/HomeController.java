@@ -31,13 +31,13 @@ public class HomeController {
 		SpringApplication.run(HomeController.class, args);
 	}
 
-
-
 	@GetMapping("/main")
 	public String home(@PageableDefault Pageable pageable, Model model, String title) {
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-		pageable = new PageRequest(page, 5, new Sort(Sort.Direction.DESC, "id")); // 최근 게시물 순서로 sort
+		pageable = new PageRequest(page, 10, new Sort(Sort.Direction.DESC, "id")); // 최근 게시물 순서로 sort
 
+
+		//db insert 겹치는 부분 수정
 		model.addAttribute("boardList", questionRepository.findAll(pageable));
 
 		//int firstPage = questionRepository.findAll(pageable).nextPageable().getPageNumber();

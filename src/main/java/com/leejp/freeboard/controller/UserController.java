@@ -33,9 +33,10 @@ public class UserController {
 	}
 
 	@PostMapping("/create") // 회원가입
-	public String create(User user) {
+	public String create(User user, HttpServletResponse response) throws Exception {
 		userRepository.save(user);
-		return "redirect:/main";
+		Result.message("<script>alert('회원가입이 완료되었습니다.');</script>", response);
+		return "/user/login";
 	}
 
 	@GetMapping("/list") // 사용자 목록 조회
@@ -54,11 +55,13 @@ public class UserController {
 		User user = userRepository.findByUserId(userId);
 
 		if (user == null) { // 사용자 id가 없는 경우
-			Result.message("<script>alert('아이디를 확인해주세요.'); history.go(-1);</script>", response);
+			Result.message("<script>alert('아이디를 확인해주세요.');</script>", response);
+			return "/user/login";
 		}
 
 		if (!user.matchPassword(userPassword)) {// 패스워드가 일치하지 않는경우
-			Result.message("<script>alert('비밀번호를 확인해주세요.'); history.go(-1);</script>", response);
+			Result.message("<script>alert('비밀번호를 확인해주세요.');</script>", response);
+			return "/user/login";
 		}
 
 		session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, user); // 세션 설정
@@ -75,6 +78,10 @@ public class UserController {
 	@GetMapping("/{id}/form") // 개인정보 수정 화면 이동
 	public String updateForm(@PathVariable Long id, Model model, HttpSession session, HttpServletResponse response) throws Exception {
 		User sessionedUser = HttpSessionUtils.getUserFromSession(session);
+		if (!HttpSessionUtils.isLoginUser(session)) { // 로그인 여부
+			Result.message("<script>alert('로그인이 필요합니다.');</script>", response);
+			return "/user/login";
+		}
 		if (!id.equals(sessionedUser.getId())) {
 			Result.message("<script>alert('다른 사용자의 정보는 수정할 수 없습니다.'); history.go(-1);</script>", response);
 		}
