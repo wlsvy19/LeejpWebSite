@@ -1,0 +1,77 @@
+mysql 설치
+
+서버타임존 설정
+cd /etc/my.cnf.d
+vi server.cnf
+--파일 수정
+[mysqld]
+default-time-zone='+9:00'
+
+mysql 접속
+mysql -u root -p
+123123
+use mysql;
+show tables;
+select host, user, authentication_string from user;
+grant all privileges on mysql.* to 'leejp'@'%' identified by '123123';
+->mysql 데이터베이스에 leejp라는 계정을 생성, 모든 아이피로 접속가능, 비번123123
+
+
+show databases
+---------------------------------------------------------------
+
+--처리 안하면 웹에서 회원가입등 한글로 데이터 넣을때 오류발생
+ALTER TABLE web_user convert to charset utf8 
+--회원
+create table web_user(
+	id bigint(19) not null auto_increment,
+	user_email varchar(255),
+	user_id varchar(30) not null,
+	user_name varchar(255),
+	user_password varchar(255),
+	primary key(id)
+)
+
+select * from web_user
+
+drop table web_user
+
+---------------------------------------------------------------
+--게시글
+ALTER TABLE web_question convert to charset utf8 
+
+create table web_question(
+	id bigint(19) not null auto_increment,
+	contents BLOB,
+	count_of_answer integer default 0,
+	create_date varbinary(255),
+	title varchar(30),
+	writer_id bigint(19),	
+	primary key(id)
+)
+
+select * from web_question
+
+drop table web_question
+
+---------------------------------------------------------------
+--댓글
+ALTER TABLE web_answer convert to charset utf8 
+
+create table web_answer(
+	id bigint(19) not null auto_increment,
+	contents BLOB,
+	create_date varbinary(255),
+	count_of_answer integer default 0,
+	error_message varchar(255),
+	valid BOOLEAN not null,
+	question_id bigint(19),
+	writer_id bigint(19),	
+	primary key(id)
+)
+
+select * from web_answer
+
+drop table web_answer
+
+

@@ -13,11 +13,13 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
+@Table(name="web_question")
 public class Question {
 	@Id
 	@GeneratedValue

@@ -1,7 +1,5 @@
 package com.leejp.freeboard.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -34,23 +32,26 @@ public class HomeController {
 	@GetMapping("/main")
 	public String home(@PageableDefault Pageable pageable, Model model, String title) {
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-		pageable = new PageRequest(page, 10, new Sort(Sort.Direction.DESC, "id")); // 최근 게시물 순서로 sort
+		//pageable = new PageRequest(page, 5, new Sort(Sort.Direction.DESC, "id")); // 최근 게시물 순서로 sort
+		pageable = PageRequest.of(page, 5, Sort.by("id"));
 
+		// db insert 겹치는 부분 수정
+//		model.addAttribute("boardList", questionRepository.findAll(pageable));
+//
+//		int firstPage = questionRepository.findAll(pageable).nextPageable().getPageNumber();
+//		int lastPage = questionRepository.findAll(pageable).getTotalPages();
+//
+//		ArrayList<Integer> list = new ArrayList<>();
+//		for (int i = 2; i < lastPage; i++) {
+//			list.add(i);
+//		}
+//
+//		model.addAttribute("list", list);
+//		model.addAttribute("firstPage", 1);
+//		model.addAttribute("lastPage", lastPage);
 
-		//db insert 겹치는 부분 수정
-		model.addAttribute("boardList", questionRepository.findAll(pageable));
+		model.addAttribute("test", "thymeleaf");
 
-		//int firstPage = questionRepository.findAll(pageable).nextPageable().getPageNumber();
-		int lastPage = questionRepository.findAll(pageable).getTotalPages();
-
-		ArrayList<Integer> list = new ArrayList<>();
-		for (int i = 2; i < lastPage; i++) {
-			list.add(i);
-		}
-
-		model.addAttribute("list", list);
-		model.addAttribute("firstPage", 1);
-		model.addAttribute("lastPage", lastPage);
 
 		return "index";
 	}

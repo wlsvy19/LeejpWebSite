@@ -32,15 +32,16 @@ public class UserController {
 		return "/user/form";
 	}
 
-	@PostMapping("/create") // 회원가입
+	@PostMapping("/create") // 회원가입 완료
 	public String create(User user, HttpServletResponse response) throws Exception {
 		userRepository.save(user);
-		Result.message("<script>alert('회원가입이 완료되었습니다.');</script>", response);
-		return "/user/login";
+		//Result.message("<script>alert('회원가입이 완료되었습니다.');</script>", response);
+		return "redirect:/main";
 	}
 
 	@GetMapping("/list") // 사용자 목록 조회
 	public String list(Model model) {
+		System.out.println("user list");
 		model.addAttribute("users", userRepository.findAll());
 		return "/user/list";
 	}
@@ -86,14 +87,14 @@ public class UserController {
 			Result.message("<script>alert('다른 사용자의 정보는 수정할 수 없습니다.'); history.go(-1);</script>", response);
 		}
 
-		User user = userRepository.findOne(id);
+		User user = userRepository.getOne(id);
 		model.addAttribute("user", user);
 		return "/user/updateForm";
 	}
 
 	@PutMapping("/{id}") // 개인정보 수정 완료
 	public String update(@PathVariable Long id, User updatedUser, HttpSession session) {
-		User user = userRepository.findOne(id);
+		User user = userRepository.getOne(id);
 		user.update(updatedUser);
 		userRepository.save(user);
 		return "redirect:/users/list";

@@ -50,7 +50,7 @@ public class ApiAnswerController {
         }
 
         User loginUser = HttpSessionUtils.getUserFromSession(session);
-        Question question = questionRepository.findOne(questionId);
+        Question question = questionRepository.getOne(questionId);
         Answer answer = new Answer(loginUser, question, contents);
 
         question.addAnswer(); //댓글수 +1
@@ -64,15 +64,15 @@ public class ApiAnswerController {
             return Result.fail("로그인이 필요합니다.");
         }
 
-        Answer answer = answerRepository.findOne(id);
+        Answer answer = answerRepository.getOne(id);
         User loginUser = HttpSessionUtils.getUserFromSession(session);
         if (!answer.isSameWriter(loginUser)) {
             return Result.fail("자신의 글만 삭제할 수 있습니다.");
         }
 
-        answerRepository.delete(id);
+        answerRepository.deleteById(id);
 
-        Question question = questionRepository.findOne(questionId);
+        Question question = questionRepository.getOne(questionId);
         question.deleteAnswer(); //댓글수 -1
         questionRepository.save(question); //댓글수 줄어든거 db반영
         return Result.ok();
@@ -84,7 +84,7 @@ public class ApiAnswerController {
         if(!HttpSessionUtils.isLoginUser(session)) {
             return Result.fail("로그인이 필요합니다.");
         }
-        Answer answer = answerRepository.findOne(id);
+        Answer answer = answerRepository.getOne(id);
         User loginUser = HttpSessionUtils.getUserFromSession(session);
         if(!answer.isSameWriter(loginUser)) {
             return Result.fail("자신의 글만 수정할 수 있습니다.");

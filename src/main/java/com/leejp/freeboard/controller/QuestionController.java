@@ -47,14 +47,14 @@ public class QuestionController {
 
 	@GetMapping("/{id}") // ID에 해당하는 게시글 내용
 	public String show(@PathVariable Long id, Model model) {
-		model.addAttribute("question", questionRepository.findOne(id));
+		model.addAttribute("question", questionRepository.getOne(id));
 		return "/board/show";
 	}
 
 	@GetMapping("/{id}/form") // ID에 해당하는 수정 폼 이동
 	public String updateForm(@PathVariable Long id, Model model, HttpSession session, HttpServletResponse response)
 			throws Exception {
-		Question question = questionRepository.findOne(id);
+		Question question = questionRepository.getOne(id);
 		Result result = HttpSessionUtils.valid(session, question);
 		if (!result.isValid()) {
 			Result.message("<script>alert('자신이 쓴 글만 수정할 수 있습니다.'); history.go(-1);</script>", response);
@@ -66,7 +66,7 @@ public class QuestionController {
 	@PutMapping("/{id}") // ID에 해당하는 글 수정
 	public String update(@PathVariable Long id, String title, String contents, Model model, HttpSession session,
 			HttpServletResponse response) throws Exception {
-		Question question = questionRepository.findOne(id);
+		Question question = questionRepository.getOne(id);
 		question.update(title, contents);
 		questionRepository.save(question);
 		return String.format("redirect:/boards/%d", id);
@@ -74,14 +74,14 @@ public class QuestionController {
 
 	@DeleteMapping("/{id}") // ID에 해당하는 글 삭제
 	public String delete(@PathVariable Long id, Model model, HttpSession session, HttpServletResponse response) throws Exception {
-		Question question = questionRepository.findOne(id);
+		Question question = questionRepository.getOne(id);
 		Result result = HttpSessionUtils.valid(session, question);
 		if (!result.isValid()) {
 			Result.message("<script>alert('자신이 쓴 글만 수정할 수 있습니다.'); history.go(-1);</script>", response);
 			return "/user/login";
 		}
 
-		questionRepository.delete(id);
+		questionRepository.deleteById(id);
 		return "redirect:/main";
 	}
 

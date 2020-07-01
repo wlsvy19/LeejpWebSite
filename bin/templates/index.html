@@ -1,48 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>{{> /include/header}}
+<head>
+
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Q&A 게시판</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/styles.css" rel="stylesheet">
+
+
+
+
 </head>
 <body>
-	{{> /include/navigation}}
-	<div class="container" id="main">
-		<div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
-			<div class="panel panel-default qna-list">
-				<ul class="list">
-					{{#boardList}}
-					<li>
-						<div class="wrap">
-							<div class="main">
-								<strong class="subject"> <a href="/boards/{{id}}">{{title}}</a>
-								</strong>
-								<div class="auth-info">
-									<a href="#" class="author">{{writer.userId}}</a>
-								</div>
-								<div class="reply" title="댓글">
-									<i class="icon-reply"></i> <span class="point">{{countOfAnswer}}</span>
-								</div>
-							</div>
-						</div>
-					</li> {{/boardList}}
-				</ul>
+	
+	
+	<nav class="navbar navbar-fixed-top header">
+    <div class="col-md-12">
+        <div class="navbar-header">
+            <a href="/main" class="navbar-brand">Main</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
+    </div>
+</nav>
 
-				<div class="row">
-					<div class="col-md-3"></div>
-					<div class="col-md-6 text-center">
-						<ul class="pagination center-block" style="display: inline-block;">
-							<li><a href="/main?page={{firstPage}}">{{firstPage}}</a></li>
-							{{#list}}
-							<li><a href="/main?page={{this}}">{{this}}</a></li> 
-							{{/list}}
-							<li><a href="/main?page={{lastPage}}">{{lastPage}}</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3 qna-write">
-						<a class="btn btn-primary pull-right" href="/boards/form"  role="button"">질문하기</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	{{> /include/footer}}
+<div class="navbar navbar-default" id="subnav">
+    <div class="col-md-12">
+        <div class="collapse navbar-collapse" id="navbar-collapse2">
+            <ul class="nav navbar-nav navbar-right">
+
+				<li><a href="/main" role="button">게시판</a></li>
+                <li><a href="/users/loginForm" role="button">로그인</a></li>
+                <li><a href="/users/form" role="button">회원가입</a></li>
+
+			
+
+                <li><a href="/users/logout" role="button">로그아웃</a></li>
+                <li><a href="/users/{{id}}/form" role="button">개인정보수정</a></li>
+
+            <li><a href="/users/list" role="button">사용자 목록</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>

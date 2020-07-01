@@ -17,6 +17,6 @@ public class ApiUserController {
 
 	@GetMapping("/{id}")
 	public User show(@PathVariable Long id) {
-		return userRepository.findOne(id);
+		return userRepository.getOne(id);
 	}
 }

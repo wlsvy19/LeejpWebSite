@@ -3,15 +3,18 @@ package com.leejp.freeboard.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
+@Table(name = "web_user")
 public class User {
 	@Id // primary key
-	@GeneratedValue // auto increase +1
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto increase +1
 	@JsonProperty // getter를쓰지 않고 사용자정보를 json으로 가져옴
 	private Long id;
 
