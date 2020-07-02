@@ -29,7 +29,7 @@ public class HomeController {
 		SpringApplication.run(HomeController.class, args);
 	}
 
-	@GetMapping("/main")
+	@GetMapping("/")
 	public String home(@PageableDefault Pageable pageable, Model model, String title) {
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
 		//pageable = new PageRequest(page, 5, new Sort(Sort.Direction.DESC, "id")); // 최근 게시물 순서로 sort

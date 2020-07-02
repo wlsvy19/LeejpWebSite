@@ -9,8 +9,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/styles.css" rel="stylesheet">
+<link href="/css/bootstrap.min.css?ver=1" rel="stylesheet">
+<link href="/css/styles.css?ver=1" rel="stylesheet">
 <!-- header end -->
 </head>
 <body>
@@ -18,7 +18,7 @@
 <nav class="navbar navbar-fixed-top header">
     <div class="col-md-12">
         <div class="navbar-header">
-            <a href="/main" class="navbar-brand">Main</a>
+            <a href="/" class="navbar-brand">Main</a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
                 <i class="glyphicon glyphicon-search"></i>
             </button>
@@ -33,44 +33,46 @@
 
 				<li><a href="/main" role="button">게시판</a></li>
                 <li><a href="/users/loginForm" role="button">로그인</a></li>
-                <li><a href="/users/form" role="button">회원가입</a></li>
+                <li><a href="/userForm" role="button">회원가입</a></li>
 
 			
 
                 <li><a href="/users/logout" role="button">로그아웃</a></li>
                 <li><a href="/users/{{id}}/form" role="button">개인정보수정</a></li>
 
-            <li><a href="/users/list" role="button">사용자 목록</a></li>
+            <li class="user-list"><a href="/userList" role="button">사용자 목록</a></li>
             </ul>
         </div>
     </div>
 </div>
 <!-- navigation end-->
+<!-- contents -->
 <div class="container" id="main">
-   <div class="col-md-10 col-md-offset-1">
-      <div class="panel panel-default">
-          <table class="table table-hover">
-              <thead>
-                <tr>
-                    <th>#</th> <th>사용자 아이디</th> <th>이름</th> <th>이메일</th><th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="users : ${users}">
-                    <th scope="row"></th> 
-                    <td th:text="${users.userId}"></td> 
-                    <td th:text="${users.userName}"></td> 
-                    <td th:text="${users.userEmail}"></td> 
-                </tr>
-              </tbody>
-          </table>
-        </div>
-    </div>
+	<div class="col-md-10 col-md-offset-1">
+		<div class="panel panel-default">
+			<table class="table table-hover">
+				<thead>
+ 					<tr>
+						<th>#</th> <th>사용자 아이디</th> <th>이름</th> <th>이메일</th><th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user : ${userInfo}">
+						<td th:text="${user.Id}"/>
+						<td th:text="${user.userId}"/>
+						<td th:text="${user.userName}"/>
+						<td th:text="${user.userEmail}"/>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
+<!-- contents end -->
 <!-- footer -->
-<script src="/js/jquery-2.2.0.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/scripts.js"></script>
+<script src="/js/jquery-2.2.0.min.js?ver=1"></script>
+<script src="/js/bootstrap.min.js?ver=1"></script>
+<script type="text/javascript" src="/js/scripts.js?ver=1"></script>
 <!-- footer end-->
 	</body>
 </html>

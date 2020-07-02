@@ -69,4 +69,22 @@ public class User {
 		this.userEmail = modifyUser.userEmail;
 	}
 
+	public String getUserPassword() {
+		return userPassword;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
 }

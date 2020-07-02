@@ -1,28 +1,26 @@
-mysql 설치
+--mysql install
 
-서버타임존 설정
+--server timezone config
 cd /etc/my.cnf.d
 vi server.cnf
---파일 수정
-[mysqld]
+--file modify
+[mysqld] -part insert
 default-time-zone='+9:00'
 
-mysql 접속
+--mysql connect
 mysql -u root -p
 123123
 use mysql;
 show tables;
 select host, user, authentication_string from user;
 grant all privileges on mysql.* to 'leejp'@'%' identified by '123123';
-->mysql 데이터베이스에 leejp라는 계정을 생성, 모든 아이피로 접속가능, 비번123123
 
 
-show databases
+show databases;
 ---------------------------------------------------------------
 
---처리 안하면 웹에서 회원가입등 한글로 데이터 넣을때 오류발생
 ALTER TABLE web_user convert to charset utf8 
---회원
+
 create table web_user(
 	id bigint(19) not null auto_increment,
 	user_email varchar(255),
@@ -37,7 +35,6 @@ select * from web_user
 drop table web_user
 
 ---------------------------------------------------------------
---게시글
 ALTER TABLE web_question convert to charset utf8 
 
 create table web_question(
@@ -55,7 +52,7 @@ select * from web_question
 drop table web_question
 
 ---------------------------------------------------------------
---댓글
+
 ALTER TABLE web_answer convert to charset utf8 
 
 create table web_answer(

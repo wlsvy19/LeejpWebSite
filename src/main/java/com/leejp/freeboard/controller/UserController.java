@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.leejp.freeboard.controller.repository.UserRepository;
 import com.leejp.freeboard.domain.User;
@@ -20,29 +19,34 @@ import com.leejp.freeboard.util.Result;
 
 @SpringBootApplication
 @Controller
-@RequestMapping("/users")
+// @RequestMapping("/users")
 public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
 
-	@GetMapping("/form") // 회원가입 화면 이동
+	@GetMapping("/userForm") // 회원가입 화면 이동
 	public String form() {
 		System.out.println("user form");
 		return "/user/form";
 	}
 
-	@PostMapping("/create") // 회원가입 완료
-	public String create(User user, HttpServletResponse response) throws Exception {
-		userRepository.save(user);
-		//Result.message("<script>alert('회원가입이 완료되었습니다.');</script>", response);
-		return "redirect:/main";
+	@PostMapping("/userCreate") // 회원가입 완료
+	public String create(User user, HttpServletResponse response, Model model) throws Exception {
+		userRepository.save(user); // 입력한 회원정보 DB저장
+		model.addAttribute("user", userRepository.findAll());
+		System.out.println("ID: " + user.getId());
+		System.out.println("userID: " + user.getUserId());
+		System.out.println("userPassWord: " + user.getUserPassword());
+		System.out.println("userName: " + user.getUserName());
+		System.out.println("userEmail: " + user.getUserEmail());
+		// return "/user/list";
+		return "redirect:/userList";
 	}
 
-	@GetMapping("/list") // 사용자 목록 조회
+	@GetMapping("/userList") // 사용자 목록 조회
 	public String list(Model model) {
-		System.out.println("user list");
-		model.addAttribute("users", userRepository.findAll());
+		model.addAttribute("userInfo", userRepository.findAll());
 		return "/user/list";
 	}
 
@@ -52,7 +56,8 @@ public class UserController {
 	}
 
 	@PostMapping("/login") // 로그인
-	public String login(String userId, String userPassword, HttpSession session, HttpServletResponse response) throws Exception {
+	public String login(String userId, String userPassword, HttpSession session, HttpServletResponse response)
+			throws Exception {
 		User user = userRepository.findByUserId(userId);
 
 		if (user == null) { // 사용자 id가 없는 경우
@@ -77,7 +82,8 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}/form") // 개인정보 수정 화면 이동
-	public String updateForm(@PathVariable Long id, Model model, HttpSession session, HttpServletResponse response) throws Exception {
+	public String updateForm(@PathVariable Long id, Model model, HttpSession session, HttpServletResponse response)
+			throws Exception {
 		User sessionedUser = HttpSessionUtils.getUserFromSession(session);
 		if (!HttpSessionUtils.isLoginUser(session)) { // 로그인 여부
 			Result.message("<script>alert('로그인이 필요합니다.');</script>", response);
