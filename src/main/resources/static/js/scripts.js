@@ -1,6 +1,6 @@
 //회원가입 처리
 $(".user-create button[type=submit]").click(userCreate);
-function userCreate(e) {
+function userCreate() {
 	var userId = $('input[name=userId]').val();
 	var userPassword = $('input[name=userPassword]').val();
 	var userName = $('input[name=userName]').val();
@@ -14,7 +14,7 @@ function userCreate(e) {
 		alert("패스워드를 입력하세요.");
 		return false;
 	}
-	else if (userName == "") {
+	else if (userName == "") {  
 		alert("이름을 입력하세요.");
 		return false;
 	}
@@ -26,14 +26,22 @@ function userCreate(e) {
 		alert("회원가입이 완료되었습니다.");
 }
 
-//사용자 목록
-$('.user-list').click(function(e){
-	console.log("${userList}");
-	return false;
-})
+//로그인 유효성 검사
+//if($("#loginResult").val() == "NI"){
+//	$("#idErr")[0].hidden = false;
+//}else if($("#loginResult").val() == "PE"){
+//	$("#pwdErr")[0].hidden = false;
+//}
 
+//if($("#loginResult").val() == null){
+//	alert("로그인 되었습니다.");
+//}
 
-//댓글 ajax처리
+function logout(){
+	alert("로그아웃 되었습니다.");
+}
+
+// 댓글 ajax처리
 $(".answer-write input[type=submit]").click(addAnswer);
 
 function addAnswer(e) {
@@ -92,7 +100,7 @@ function deleteAnswer(e) {
 				alert("다름 사람의 댓글은 삭제할 수 없습니다.");
 			}
 		}
-	});//end ajax  
+	});// end ajax
 }
 
 $(document).on('click', '.link-update-answer', updateAnswer);
@@ -121,3 +129,4 @@ String.prototype.format = function() {
 		return typeof args[number] != 'undefined' ? args[number] : match;
 	});
 };
+

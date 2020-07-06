@@ -1,0 +1,26 @@
+<header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+	<nav class="navbar navbar-fixed-top header">
+		<div class="col-md-12">
+			<div class="navbar-header">
+				<a href="/" class="navbar-brand">Main</a>
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
+						<i class="glyphicon glyphicon-search"></i>
+					</button>
+			</div>
+		</div>
+	</nav>
+	<div class="navbar navbar-default" id="subnav">
+		<div class="col-md-12">
+			<div class="collapse navbar-collapse" id="navbar-collapse2">
+				<ul class="nav navbar-nav navbar-right">
+					<li th:if="${session.sessionUser}"><a href="/logout" role="button" onclick="logout()">로그아웃</a></li>
+					<li th:if="${session.sessionUser}"><a href="#" role="button">개인정보수정</a></li>
+					<li th:if="${session.sessionUser}"><a href="/userList" role="button">사용자 목록</a></li>
+					<li th:unless="${session.sessionUser}"><a href="/#" role="button">게시판</a></li>
+					<li th:unless="${session.sessionUser}"><a href="/loginForm" role="button">로그인</a></li>
+					<li th:unless="${session.sessionUser}"><a href="/userForm" role="button">회원가입</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</header>

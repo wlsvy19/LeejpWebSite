@@ -1,67 +1,15 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/main_layout}">
 <head>
-
-<!-- header -->
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<title>Q&A 게시판</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<link href="/css/bootstrap.min.css?ver=1" rel="stylesheet">
-<link href="/css/styles.css?ver=1" rel="stylesheet">
-<!-- header end -->
+<title>index.html</title>
 </head>
-
-<!-- navigation -->
 <body>
-	<nav class="navbar navbar-fixed-top header">
-    <div class="col-md-12">
-        <div class="navbar-header">
-            <a href="/" class="navbar-brand">Main</a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
-                <i class="glyphicon glyphicon-search"></i>
-            </button>
-        </div>
-    </div>
-</nav>
- 
-<div class="navbar navbar-default" id="subnav">
-    <div class="col-md-12">
-        <div class="collapse navbar-collapse" id="navbar-collapse2">
-            <ul class="nav navbar-nav navbar-right">
-
-				<li><a href="/" role="button">게시판</a></li>
-				<li><a href="#" role="button">로그인</a></li>
-				<li><a href="/userForm" role="button">회원가입</a></li>
-
-			
-				<li><a href="#" role="button">로그아웃</a></li>
-				<li><a href="#" role="button">개인정보수정</a></li>
-				
-				<li><a href="/userList" role="button">사용자 목록</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- navigation -->	
-
-<!-- footer -->
-<script src="/js/jquery-2.2.0.min.js?ver=1"></script>
-<script src="/js/bootstrap.min.js?ver=1"></script>
-<script type="text/javascript" src="/js/scripts.js?ver=1"></script>
-<!-- footer end-->	
 
 <!-- contents -->
-	<h1>내용입니다.</h1>
-<!-- contents end -->	
+<div layout:fragment="content" class="container">
 
-<!-- footer -->
-<script src="/js/jquery-2.2.0.min.js?ver=1"></script>
-<script src="/js/bootstrap.min.js?ver=1"></script>
-<script type="text/javascript" src="/js/scripts.js?ver=1"></script>
-<!-- footer end-->
-	
+</div>
+<!-- contents end -->
+
 </body>
 </html>

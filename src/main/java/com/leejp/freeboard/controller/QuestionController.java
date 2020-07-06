@@ -77,7 +77,7 @@ public class QuestionController {
 		Question question = questionRepository.getOne(id);
 		Result result = HttpSessionUtils.valid(session, question);
 		if (!result.isValid()) {
-			Result.message("<script>alert('자신이 쓴 글만 수정할 수 있습니다.'); history.go(-1);</script>", response);
+			Result.message("<script>alert('자신이 쓴 글만 삭제할 수 있습니다.'); history.go(-1);</script>", response);
 			return "/user/login";
 		}
 

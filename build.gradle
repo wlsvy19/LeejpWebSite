@@ -30,6 +30,9 @@ dependencies {
 	// add thymeleaf
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.1.4.RELEASE'
 	
+	//add thymeleaf-layout-dialect
+	compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.1.2'
+	
 	//add mysql-connector-java
 	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'
 	

@@ -1,31 +1,60 @@
-<!DOCTYPE html>
-<html lang="kr">
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/main_layout}">
 <head>
-{{> /include/header}}
+<title>login.html</title>
 </head>
 <body>
-{{> /include/navigation}}
-<div class="container" id="main">
-   <div class="col-md-6 col-md-offset-3">
-      <div class="panel panel-default content-main">
-      {{#errorMessage}}
-      	<div class="alert alert-danger" role="alert">{{this}}</div>
-      {{/errorMessage}}	
-          <form name="question" method="post" action="/users/login">
-              <div class="form-group">
-                  <label for="userId">사용자 아이디</label>
-                  <input class="form-control" id="userId" name="userId" placeholder="User ID">
-              </div>
-              <div class="form-group">
-                  <label for="password">비밀번호</label>
-                  <input type="password" class="form-control" id="password" name="userPassword" placeholder="Password">
-              </div>
-              <button type="submit" class="btn btn-success clearfix pull-right">로그인</button>
-              <div class="clearfix" />
-          </form>
-        </div>
-    </div>
+
+<!-- contents -->
+<div layout:fragment="content" class="container">
+	<div class="container" id="main">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-default content-main">
+				<form class="user-login" name="question" method="post" action="/userLogin">
+					<div class="form-group">
+						<label for="userId">사용자 아이디</label>
+						<input class="form-control" id="userId" name="userId" placeholder="User ID">
+					</div>
+					<div class="form-group">
+						<label for="password">비밀번호</label>
+						<input type="password" class="form-control" id="password" name="userPassword" placeholder="Password">
+					</div>
+						
+						<!--  
+				 		<div class="form-group">
+							<input th:value="${loginErr}" type="text" id="loginResult" hidden="true"/>
+								<div class="alert alert-danger alert-dismissable text-left" id="idErr" hidden="true">
+									<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+										아이디를 확인해 주세요.
+								</div>
+								<div class="alert alert-danger alert-dismissable text-left" id="pwdErr" hidden="true">
+									<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+									비밀번호를 확인해 주세요.
+								</div>
+						</div>
+						-->
+				
+					<div class="form-group">
+						<input th:value="${loginErr}" type="text" id="loginResult" hidden="true"/>
+							<div th:if="${loginErr} == 'NI'" class="alert alert-danger alert-dismissable text-left" id="idErr">
+								<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+									아이디를 확인해 주세요.
+							</div>
+							<div th:if="${loginErr} == 'PE'" class="alert alert-danger alert-dismissable text-left" id="pwdErr">
+								<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+									비밀번호를 확인해 주세요.
+							</div>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success clearfix pull-right" onclick="loginBtn();">로그인</button>
+							<div class="clearfix" ></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
-{{> /include/footer}}
+<!-- contents end -->
+
 </body>
 </html>

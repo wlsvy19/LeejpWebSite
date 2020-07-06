@@ -55,30 +55,31 @@ public class UserController {
 		return "/user/login";
 	}
 
-	@PostMapping("/login") // 로그인
-	public String login(String userId, String userPassword, HttpSession session, HttpServletResponse response)
+	@PostMapping("/userLogin") // 로그인
+	public String login(String userId, String userPassword, Model model,HttpSession session, HttpServletResponse response)
 			throws Exception {
-		User user = userRepository.findByUserId(userId);
+		System.out.println("user login");
+		User sessionUserId = userRepository.findByUserId(userId);
 
-		if (user == null) { // 사용자 id가 없는 경우
-			Result.message("<script>alert('아이디를 확인해주세요.');</script>", response);
+		if (sessionUserId == null) { // 사용자 id가 없는 경우
+			model.addAttribute("loginErr", "NI");
 			return "/user/login";
 		}
 
-		if (!user.matchPassword(userPassword)) {// 패스워드가 일치하지 않는경우
-			Result.message("<script>alert('비밀번호를 확인해주세요.');</script>", response);
+		if (!sessionUserId.matchPassword(userPassword)) {// 패스워드가 일치하지 않는경우
+			model.addAttribute("loginErr", "PE");
 			return "/user/login";
 		}
 
-		session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, user); // 세션 설정
-		return "redirect:/main";
+		session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, sessionUserId); // 세션 얻기
+		return "index";
 	}
 
 	@GetMapping("/logout") // 로그아웃
 	public String logout(HttpSession session, HttpServletResponse response) throws Exception {
 		session.removeAttribute(HttpSessionUtils.USER_SESSION_KEY);
-		Result.message("<script>alert('로그아웃 되었습니다.');</script>", response);
-		return "/main";
+		//Result.message("<script>alert('로그아웃 되었습니다.');</script>", response);
+		return "index";
 	}
 
 	@GetMapping("/{id}/form") // 개인정보 수정 화면 이동

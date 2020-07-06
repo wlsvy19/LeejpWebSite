@@ -1,86 +1,42 @@
-<!DOCTYPE html>
-<html lagn="ko" 
-      xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/main_layout}">
 <head>
-<!-- header -->
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<title>Q&A 게시판</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<link href="/css/bootstrap.min.css?ver=1" rel="stylesheet">
-<link href="/css/styles.css?ver=1" rel="stylesheet">
-<!-- header end -->
+<title>form.html</title>
 </head>
 <body>
 
-<!-- navigation -->
-<nav class="navbar navbar-fixed-top header">
-    <div class="col-md-12">
-        <div class="navbar-header">
-            <a href="/" class="navbar-brand">Main</a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
-                <i class="glyphicon glyphicon-search"></i>
-            </button>
-        </div>
-    </div>
-</nav>
-
-<div class="navbar navbar-default" id="subnav">
-    <div class="col-md-12">
-        <div class="collapse navbar-collapse" id="navbar-collapse2">
-            <ul class="nav navbar-nav navbar-right">
-
-				<li><a href="/" role="button">게시판</a></li>
-                <li><a href="/users/loginForm" role="button">로그인</a></li>
-                <li><a href="/userForm" role="button">회원가입</a></li>
-
-			
-
-                <li><a href="/users/logout" role="button">로그아웃</a></li>
-                <li><a href="/users/{{id}}/form" role="button">개인정보수정</a></li>
-
-            <li class="user-list"><a href="/userList" role="button">사용자 목록</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- navigation end-->
-
 <!-- contents -->
-<div class="container" id="main">
-   <div class="col-md-6 col-md-offset-3">
-      <div class="panel panel-default content-main">
-          <form class="user-create" name="question" method="post" action="/userCreate">
-              <div class="form-group">
-                  <label for="userId">사용자 아이디</label>
-                  <input class="form-control" name="userId" placeholder="User ID">
-              </div>
-              <div class="form-group">
-                  <label for="password">비밀번호</label>
-                  <input type="password" class="form-control" name="userPassword" placeholder="Password">
-              </div>
-              <div class="form-group">
-                  <label for="name">이름</label>
-                  <input class="form-control" name="userName" placeholder="Name">
-              </div>
-              <div class="form-group">
-                  <label for="email">이메일</label>
-                  <input type="email" class="form-control" name="userEmail" placeholder="Email">
-              </div>
-              <button type="submit" class="btn btn-success clearfix pull-right">회원가입 완료</button>
-              <div class="clearfix" />
-          </form>
-        </div>
-    </div>
+<div layout:fragment="content" class="container">
+	<div class="container" id="main">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-default content-main">
+				<form class="user-create" name="question" method="post" action="/userCreate">
+					<div class="form-group">
+						<label for="userId">사용자 아이디</label>
+						<input class="form-control" name="userId" placeholder="User ID">
+					</div>
+					<div class="form-group">
+						<label for="password">비밀번호</label>
+						<input type="password" class="form-control" name="userPassword" placeholder="Password">
+					</div>
+					<div class="form-group">
+						<label for="name">이름</label>
+						<input class="form-control" name="userName" placeholder="Name">
+					</div>
+					<div class="form-group">
+						<label for="email">이메일</label>
+						<input type="email" class="form-control" name="userEmail" placeholder="Email">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success clearfix pull-right">회원가입 완료</button>
+						<div class="clearfix" ></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- contents end -->
 
-<!-- footer -->
-<script src="/js/jquery-2.2.0.min.js?ver=1"></script>
-<script src="/js/bootstrap.min.js?ver=1"></script>
-<script type="text/javascript" src="/js/scripts.js?ver=1"></script>
-<!-- footer end-->
 </body>
 </html>
